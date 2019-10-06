@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Model to coordinates table
+function setModelCoordinates() {
+	case $MODEL in
+	    mi-mix-2)
+			X=717
+	        Y=2024;;
+	    *)
+			echo "Unknown model $1"
+	        exit 3
+	esac
+}
+
 # Default delay
 DELAY=0.5
 
@@ -34,8 +46,11 @@ if [ -z "$MODEL" ]; then
 		exit 2
 	fi
 else
+	echo "Selected model $MODEL"
 	setModelCoordinates
 fi
+
+echo "Coordinates set to $X $Y"
 
 # Click like forever
 while true; do
@@ -43,15 +58,3 @@ while true; do
 	sleep "$DELAY";
 done
 exit 0
-
-# Model to coordinates table
-function setModelCoordinates {
-	case $MODEL in
-	    mi-mix-2)
-			X=717
-	        Y=2024;;
-	    *)
-			echo "Unknown model $1"
-	        exit 3
-	esac
-}
