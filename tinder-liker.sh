@@ -17,12 +17,16 @@ function setModel() {
 
 function setDetectedModelCoordinates() {
 	case $MODEL in
-	    OnePlus7Pro)
+		# OnePlus 7 Pro
+	    GM1913) 
 			X=750
-			Y=1600;;
+			Y=1600
+			OFFSET=600;;
+		# Xiaomi Mi MIX 2
 		Mi_MIX_2)
 			X=500
-	        Y=1000;;				
+	        Y=1000
+	        OFFSET=500;;				
 	    *)
 			echo "Unknown model $1"
 	        exit 3
@@ -68,7 +72,7 @@ echo "Coordinates set to $X $Y"
 # Swipe like forever
 echo "Swiping... (Ctrl-C to stop and go home)"
 while true; do
-	END_X=$((X + 400))
+	END_X=$((X + OFFSET))
 	adb shell input touchscreen swipe $X $Y $END_X $Y
 	sleep "$DELAY";
 done
