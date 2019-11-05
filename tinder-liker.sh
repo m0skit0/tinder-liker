@@ -34,7 +34,7 @@ function setDetectedModelCoordinates() {
 }
 
 # Default delay
-DELAY=0.5
+DELAY=0
 
 # Get params
 while [ "$1" != "" ]; do
