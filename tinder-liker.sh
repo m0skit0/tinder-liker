@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Usage: ./tinder-liker.sh [-c X Y] [-d delay]
-# -c Define X Y coordinates
-# -d Define delay between likes (default delay recommended)
-# -g Go home after Ctrl-C
+# Usage: ./tinder-liker.sh [-c X Y] [-d delay] [-g] [-h]
+# -h  Shows help and exits (remaining switches are ignored)
+# -c  Define X Y coordinates
+# -d  Define delay between likes (default delay recommended)
+# -g  Go home after Ctrl-C
 
 trap doExit INT
 
@@ -37,12 +38,23 @@ function setDetectedModelCoordinates() {
 	esac
 }
 
+function showHelp() {
+	echo " Usage: ./tinder-liker.sh [-c X Y] [-d delay] [-g] [-h]"
+	echo -e "\t-h  Shows help and exits (remaining switches are ignored)"
+	echo -e "\t-c  Define X Y coordinates"
+	echo -e "\t-d  Define delay between likes (default delay recommended)"
+	echo -e "\t-g  Go home after Ctrl-C"
+}
+
 # Default delay
 DELAY=0
 
 # Get params
 while [ "$1" != "" ]; do
     case $1 in
+    	-h)
+			showHelp
+			exit 0;;
         -c)
 			shift
             X=$1
