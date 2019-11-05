@@ -69,6 +69,10 @@ fi
 
 echo "Coordinates set to $X $Y"
 
+# Launch Tinder
+adb shell am start -n com.tinder/.activities.LoginActivity
+sleep 5
+
 # Swipe like forever
 echo "Swiping... (Ctrl-C to stop and go home)"
 while true; do
