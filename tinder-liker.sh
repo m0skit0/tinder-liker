@@ -4,6 +4,13 @@
 # -c Define X Y coordinates
 # -d Define delay between likes (default delay recommended)
 
+trap goHome INT
+
+function goHome() {
+	adb shell input keyevent 3
+	exit 0
+}
+
 function setModel() {
 	MODEL=$(adb devices -l | grep -m 1 -i device: | sed -E 's/.*model:(.*?) device.*/\1/')
 }
@@ -59,7 +66,7 @@ fi
 echo "Coordinates set to $X $Y"
 
 # Swipe like forever
-echo "Swiping... (Ctrl-C to stop)"
+echo "Swiping... (Ctrl-C to stop and go home)"
 while true; do
 	END_X=$((X + 400))
 	adb shell input touchscreen swipe $X $Y $END_X $Y
