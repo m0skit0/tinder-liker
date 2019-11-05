@@ -3,11 +3,15 @@
 # Usage: ./tinder-liker.sh [-c X Y] [-d delay]
 # -c Define X Y coordinates
 # -d Define delay between likes (default delay recommended)
+# -g Go home after Ctrl-C
 
-trap goHome INT
+trap doExit INT
 
-function goHome() {
-	adb shell input keyevent 3
+function doExit() {
+	if [ ! -z "$GO_HOME" ]
+	then
+		adb shell input keyevent 3
+	fi
 	exit 0
 }
 
@@ -47,9 +51,8 @@ while [ "$1" != "" ]; do
         -d)
 			shift
             DELAY=$1;;
-        -m)
-			shift
-			MODEL=$1;;
+        -g)
+			GO_HOME="true";;
         *)
 			echo "Unknown parameter $1"
             exit 1
